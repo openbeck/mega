@@ -1,0 +1,37 @@
+---
+layout: runbook
+title: '#4471 · two date causes'
+owner: support desk
+status: known
+reviewed: 2026-11-15
+signature: 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjU2MDYiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5NDc1NDM4NSwiZXhwIjoxNzk0ODQwNzg1fQ.sJXX71WPgkhZDg6rJ9018i5dAxHsU8ur-LECRc3uThE'
+---
+
+<script>
+  import ReportSplit from '#lib/kb/ReportSplit.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const signature = 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjU2MDYiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5NDc1NDM4NSwiZXhwIjoxNzk0ODQwNzg1fQ.sJXX71WPgkhZDg6rJ9018i5dAxHsU8ur-LECRc3uThE';
+</script>
+
+Ticket #4471 is marked known, but it combines two causes. Split the reports by tenant locale and booking-form behavior, not by subject or intake tag.
+
+<ReportSplit ticket={4471} />
+
+## Shared parser: day and month reversed
+
+The shared parser reads month first. For tenants whose locale writes the day first, dates can flip. This is the larger group: app, email, and booking-v2 form reports across the day-first tenant directory.
+
+Filed as [openbeck/mega#1](https://github.com/openbeck/mega/issues/1) · 379 reports.
+
+## Booking-v3 hint: displayed order disagrees with tenant parsing
+
+Booking-v3 displays `MM/DD/YYYY`. In the three affected day-first tenants, people follow that hint while the form interprets the date using the tenant's locale. Keep this as a separate issue from the shared parser: the form's displayed instruction is the cause.
+
+Filed as [openbeck/mega#2](https://github.com/openbeck/mega/issues/2) · 33 reports.
+
+## Counting rule
+
+The export contains overlapping rows. Count each report ID once, as the KB's `uniqueById` helper does. The figures above describe the export snapshot from 2026-10-04; the support desk may receive more reports after that date. Intake's `parser` and `hint` tags are guesses, so use the tenant locale, channel, and form version to classify a report.
+
+<RenderStamp {signature} />
