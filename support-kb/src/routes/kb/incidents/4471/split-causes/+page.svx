@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · two date causes'
 owner: support desk
-status: known
+status: closed
 reviewed: 2026-11-15
 signature: 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjU2MDYiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5NDc1NDM4NSwiZXhwIjoxNzk0ODQwNzg1fQ.sJXX71WPgkhZDg6rJ9018i5dAxHsU8ur-LECRc3uThE'
 ---
@@ -14,7 +14,7 @@ signature: 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjU2MDYiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhd
   const signature = 'v1.eyJzdG9yeSI6Im9mZiIsInN1YiI6IjU2MDYiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5NDc1NDM4NSwiZXhwIjoxNzk0ODQwNzg1fQ.sJXX71WPgkhZDg6rJ9018i5dAxHsU8ur-LECRc3uThE';
 </script>
 
-Ticket #4471 is marked known, but it combines two causes. Split the reports by tenant locale and booking-form behavior, not by subject or intake tag.
+Ticket #4471 combined two causes. Split the reports by tenant locale and booking-form behavior, not by subject or intake tag. The desk closed #4471 on 2026-10-05 after engineering updated both outcomes.
 
 <ReportSplit ticket={4471} />
 
@@ -22,13 +22,13 @@ Ticket #4471 is marked known, but it combines two causes. Split the reports by t
 
 The shared parser reads month first. For tenants whose locale writes the day first, dates can flip. This is the larger group: app, email, and booking-v2 form reports across the day-first tenant directory.
 
-Filed as [openbeck/mega#1](https://github.com/openbeck/mega/issues/1) · 379 reports.
+Filed as [openbeck/mega#1](https://github.com/openbeck/mega/issues/1) · 379 reports. Engineering fixed this cause with `fix(dates): parse dd/mm for eu locales`; the issue is closed as completed.
 
 ## Booking-v3 hint: displayed order disagrees with tenant parsing
 
 Booking-v3 displays `MM/DD/YYYY`. In the three affected day-first tenants, people follow that hint while the form interprets the date using the tenant's locale. Keep this as a separate issue from the shared parser: the form's displayed instruction is the cause.
 
-Filed as [openbeck/mega#2](https://github.com/openbeck/mega/issues/2) · 33 reports.
+Filed as [openbeck/mega#2](https://github.com/openbeck/mega/issues/2) · 33 reports. Engineering will not fix this cause because the booking-v3 form was retired; the issue is closed as not planned.
 
 ## Counting rule
 

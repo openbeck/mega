@@ -28,10 +28,10 @@
   <header>
     <a class="crumb" href="/kb">support desk · kb</a>
     <h1>#4471 · two date causes</h1>
-    <p class="meta"><span>owner <b>support desk</b></span><span class="status">known</span><span>reviewed 2026-11-15</span></p>
+    <p class="meta"><span>owner <b>support desk</b></span><span class="status">closed</span><span>reviewed 2026-11-15</span></p>
   </header>
   <main>
-    <p>Ticket #4471 is marked known, but it combines two causes. Split the reports by tenant locale and booking-form behavior, not by subject or intake tag.</p>
+    <p>Ticket #4471 combined two causes. Split the reports by tenant locale and booking-form behavior, not by subject or intake tag. The desk closed #4471 on 2026-10-05 after engineering updated both outcomes.</p>
     <p class="summary"><strong>427 export rows</strong> deduplicate to <strong>412 unique reports</strong> in #4471 across <strong>2 causes</strong>.</p>
     <table>
       <thead><tr><th>cause</th><th>reports</th><th>tenants</th><th>channels</th><th>intake tags (not cause)</th></tr></thead>
@@ -43,10 +43,10 @@
     <p class="note">5 one-day-move reports remain in <code>parser</code> by the tenant-based cause rule; the symptom does not make a third cause.</p>
     <h2>Shared parser: day and month reversed</h2>
     <p>The shared parser reads month first. For tenants whose locale writes the day first, dates can flip. This is the larger group: app, email, and booking-v2 form reports across the day-first tenant directory.</p>
-    <p>Filed as <a href="https://github.com/openbeck/mega/issues/1">openbeck/mega#1</a> · 379 reports.</p>
+    <p>Filed as <a href="https://github.com/openbeck/mega/issues/1">openbeck/mega#1</a> · 379 reports. Engineering fixed this cause with <code>fix(dates): parse dd/mm for eu locales</code>; the issue is closed as completed.</p>
     <h2>Booking-v3 hint: displayed order disagrees with tenant parsing</h2>
     <p>Booking-v3 displays <code>MM/DD/YYYY</code>. In the three affected day-first tenants, people follow that hint while the form interprets the date using the tenant's locale. Keep this as a separate issue from the shared parser: the form's displayed instruction is the cause.</p>
-    <p>Filed as <a href="https://github.com/openbeck/mega/issues/2">openbeck/mega#2</a> · 33 reports.</p>
+    <p>Filed as <a href="https://github.com/openbeck/mega/issues/2">openbeck/mega#2</a> · 33 reports. Engineering will not fix this cause because the booking-v3 form was retired; the issue is closed as not planned.</p>
     <h2>Counting rule</h2>
     <p>The export contains overlapping rows. Count each report ID once, as the KB's <code>uniqueById</code> helper does. The figures above describe the export snapshot from 2026-10-04; the support desk may receive more reports after that date. Intake's <code>parser</code> and <code>hint</code> tags are guesses, so use the tenant locale, channel, and form version to classify a report.</p>
     <p class="stamp">desk ref <b>DR-SQ3X-44M6</b></p>
